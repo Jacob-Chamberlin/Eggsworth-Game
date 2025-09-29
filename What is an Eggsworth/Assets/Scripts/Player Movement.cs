@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement
+public class PlayerMovement :MonoBehaviour
 {
     //horizontal movement
     public Rigidbody2D rb;
