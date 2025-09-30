@@ -1,0 +1,41 @@
+{
+    "version": 1,
+    "name": "Eggsworth_Movement",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "a865d75b-30a0-40d8-a5d9-5a0560d1531c",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Button",
+                    "id": "d28b0368-5a87-41a6-8e35-2c8a814b3b0a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0212fa0f-4052-4dbf-8dde-ca4622799202",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Keyboard",
+            "bindingGroup": "Keyboard",
+            "devices": []
+        }
+    ]
+}

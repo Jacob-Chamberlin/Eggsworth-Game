@@ -63,20 +63,20 @@ public class PlayerMovement :MonoBehaviour
         }
         if (hMovement == 1)
         {
-            sr.flipX = true;
+            //sr.flipX = true;
             isMoving = true;
             //animator.SetBool("isMoving", isMoving);
         }
         if (hMovement == -1)
         {
-            sr.flipX = false;
+            //sr.flipX = false;
             isMoving = true;
             //animator.SetBool("isMoving", isMoving);
         }
         if (hMovement == 0)
         {
             isMoving = false;
-            animator.SetBool("isMoving", isMoving);
+            //animator.SetBool("isMoving", isMoving);
         }
         if (rb.linearVelocity.y <= 0)
         {
