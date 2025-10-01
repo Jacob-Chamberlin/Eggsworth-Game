@@ -1,38 +1,45 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement :MonoBehaviour
 {
     //horizontal movement
-    public Rigidbody2D rb;
-    public float moveSpeed = 5f;
-    public bool isMoving;
+    public float moveSpeed = 10f;
+    private bool isMoving;
     //public float moveSpeedCheck;
     float hMovement;
-    bool facingR;
+
     //sprint
     public bool isSprinting;
     public float sprintSpeed = 10f;
 
+    //dash
+    private bool canDash = true;
+    private bool isDashing;
+    public float dashPower = 100f;
+    private float dashTime = 0.2f;
+    private float dashCD = .4f;
+
     //jumping
     public float jumpPower = 10f;
     public float airJumpPower = 7f;
-    public int maxJumps = 3;
+    private int maxJumps = 3;
     int jumpsRemaining;
-    public bool canDJump;
-    public bool isDJumping;
-    public bool isJumping;
+    private bool canDJump;
+    private bool isDJumping;
+    private bool isJumping;
 
     //glide
     private bool canGlide = false;
-    public float MaxGlideFallSpeed = 1f;
-    public bool isGliding;
+    private float MaxGlideFallSpeed = 1f;
+    private bool isGliding;
 
     //groundcheck
-    public Transform groundCheckPos;
+    
     public Vector2 groundCheckSize = new Vector2(0.5f, 0.5f);
-    public LayerMask groundLayer;
-    public bool onGround;
+    private bool onGround;
 
     //gravity
     public float baseGravity = 2f;
@@ -42,17 +49,30 @@ public class PlayerMovement :MonoBehaviour
 
     //animation
     Animator animator;
-    private SpriteRenderer sr;
+    
+
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Transform groundCheckPos;
+    [SerializeField] private SpriteRenderer sr;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private TrailRenderer tr;
+
+
 
     private void Start()
     {
         //checks 
         maxFallSpeedCheck = maxFallSpeed;
         //animator = GetComponent<Animator>();
-        //sr = GetComponent<SpriteRenderer>();
+        sr = GetComponent<SpriteRenderer>();
     }
     private void Update()
     {
+        if (isDashing)
+        {
+            return;
+        }
+
         if (isSprinting == false)
         {
             rb.linearVelocity = new Vector2(hMovement * moveSpeed, rb.linearVelocity.y);
@@ -61,15 +81,16 @@ public class PlayerMovement :MonoBehaviour
         {
             rb.linearVelocity = new Vector2(hMovement * sprintSpeed, rb.linearVelocity.y);
         }
+
         if (hMovement == 1)
         {
-            //sr.flipX = true;
+            sr.flipX = false;
             isMoving = true;
             //animator.SetBool("isMoving", isMoving);
         }
         if (hMovement == -1)
         {
-            //sr.flipX = false;
+            sr.flipX = true;
             isMoving = true;
             //animator.SetBool("isMoving", isMoving);
         }
@@ -83,6 +104,7 @@ public class PlayerMovement :MonoBehaviour
             isDJumping = false;
             //animator.SetBool("isDJumping", isDJumping);
         }
+        
 
         GroundCheck();
         Gravity();
@@ -173,6 +195,53 @@ public class PlayerMovement :MonoBehaviour
         }
     }
     */
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (context.performed && canDash == true)
+        {
+            StartCoroutine(Dash());
+        }
+    }
+
+    private IEnumerator Dash()
+    {
+        //set up vars so other code can stfu
+        canDash = false;
+        isDashing = true;
+        float normGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+
+        //check which way to dash
+        if (sr.flipX == false)
+        {
+            rb.linearVelocity = new Vector2(transform.localScale.x * dashPower, 0f);
+        }
+        if (sr.flipX == true)
+        {
+            rb.linearVelocity = new Vector2(transform.localScale.x * -dashPower, 0f);
+        }
+        tr.emitting = true;
+
+        //how long to dash for
+        yield return new WaitForSeconds(dashTime);
+
+        //reset vars
+        tr.emitting = false;
+        rb.gravityScale = normGravity;
+        isDashing = false;
+
+        //if (onGround)
+        {
+            yield return new WaitForSeconds(dashCD);
+            canDash = true;
+        }
+        //if (!onGround)
+        {
+            //if ()
+        }
+
+    }
+
     private void GroundCheck()
     {
         if (Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundLayer))
