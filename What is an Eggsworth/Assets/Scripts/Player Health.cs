@@ -16,21 +16,24 @@ public class PlayerHealth : MonoBehaviour
 
         }
     }
-    public void OnCollisionEnter2D(Collider2D other)
+    void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.CompareTag("Hazard"))
+        if (other.gameObject.CompareTag("Hazard"))
         {
-            
+            Debug.Log("collided with hazard");
+            StartCoroutine(TakeDamage(1));
         }
     }
     private IEnumerator TakeDamage(int amount)
     {
         if (canTakeDmg)
         {
-            canTakeDmg = false;
             hp = hp - amount;
+            canTakeDmg = false;
+
             yield return new WaitForSeconds(damageCD);
             canTakeDmg = true;
         }
+
     }
 }

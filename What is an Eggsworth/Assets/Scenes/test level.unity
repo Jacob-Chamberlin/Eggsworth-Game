@@ -2318,7 +2318,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.69, y: 2.76, z: -10.5}
+  m_LocalPosition: {x: -0.69, y: 2.26, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2933,7 +2933,7 @@ Transform:
   m_GameObject: {fileID: 460127755}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.6, z: 0}
+  m_LocalPosition: {x: 0, y: -2.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4475,7 +4475,7 @@ Transform:
   m_GameObject: {fileID: 775972569}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.69, y: 2.76, z: -10.5}
+  m_LocalPosition: {x: -0.69, y: 1.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4494,7 +4494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44d70cc20219cd84593f67d248eafe36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Cinemachine::CinemachineCameraOffset
-  m_Offset: {x: 0, y: 0, z: 0}
+  m_Offset: {x: 0, y: 1, z: -9}
   m_ApplyAfter: 1
   m_PreserveComposition: 0
 --- !u!1 &786970258
@@ -7357,9 +7357,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Cinemachine::Cinemachine.CinemachineTransposer
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 1.5, z: -10.5}
-  m_XDamping: 1
-  m_YDamping: 1
+  m_FollowOffset: {x: 0, y: 0, z: 0}
+  m_XDamping: 0.4
+  m_YDamping: 2
   m_ZDamping: 1
   m_AngularDampingMode: 0
   m_PitchDamping: 0
@@ -10081,7 +10081,7 @@ GameObject:
   - component: {fileID: 1443690598}
   - component: {fileID: 1443690600}
   m_Layer: 0
-  m_Name: Triangle
+  m_Name: temp Hazard
   m_TagString: Hazard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10154,7 +10154,7 @@ Transform:
   m_GameObject: {fileID: 1443690597}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.15, y: 0.36, z: 0}
+  m_LocalPosition: {x: 29.91, y: 0.36, z: 0}
   m_LocalScale: {x: 0.42317, y: 1.2388, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10735,13 +10735,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1638615834}
+  - component: {fileID: 1638615840}
   - component: {fileID: 1638615829}
   - component: {fileID: 1638615837}
+  - component: {fileID: 1638615841}
   - component: {fileID: 1638615836}
   - component: {fileID: 1638615835}
   - component: {fileID: 1638615838}
   - component: {fileID: 1638615839}
-  - component: {fileID: 1638615840}
   m_Layer: 0
   m_Name: tempPlayer
   m_TagString: Player
@@ -10792,10 +10793,10 @@ MonoBehaviour:
     m_ActionName: 'Player/Move[/DualSenseGamepadHID/leftStick,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1638615837}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1638615841}
+        m_TargetAssemblyTypeName: PlayerAttack, Assembly-CSharp
+        m_MethodName: OnAttack
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -10990,7 +10991,7 @@ MonoBehaviour:
   dashPower: 125
   jumpPower: 11
   airJumpPower: 7
-  groundCheckSize: {x: 2.2, y: 0.5}
+  groundCheckSize: {x: 1.2, y: 0.3}
   baseGravity: 2
   maxFallSpeed: 18
   maxFallSpeedCheck: 1
@@ -11194,6 +11195,20 @@ MonoBehaviour:
   hp: 5
   canTakeDmg: 1
   damageCD: 2
+--- !u!114 &1638615841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638615828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9152a29b55a9fc148a84477d44b58207, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
+  sr: {fileID: 1638615838}
+  atkPrefab: {fileID: 6284086639618366849, guid: 285dd2568d29044478f33f2e8d89e11c, type: 3}
 --- !u!43 &1720659417
 Mesh:
   m_ObjectHideFlags: 0
@@ -11372,6 +11387,75 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!1 &1790746801
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1790746803}
+  - component: {fileID: 1790746802}
+  - component: {fileID: 1790746804}
+  m_Layer: 5
+  m_Name: CountdownUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1790746802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790746801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: 53271434f5fcc21488bf30425d62762d, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 3365b858bcee04045a18a5f05f9a3eaa, type: 3}
+  m_SortingOrder: 0
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
+--- !u!4 &1790746803
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790746801}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1790746804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790746801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd8a816243b6aac438c3c58b67914bcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CountdownUI
+  initialTime: 5
 --- !u!43 &1816270085
 Mesh:
   m_ObjectHideFlags: 0
@@ -13412,3 +13496,4 @@ SceneRoots:
   - {fileID: 1081610231}
   - {fileID: 818041721}
   - {fileID: 1443690599}
+  - {fileID: 1790746803}
