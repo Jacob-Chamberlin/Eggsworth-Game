@@ -7,37 +7,42 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private GameObject atkPrefab;
 
-    private float spawnDisFor = 1f;
-    private float spawnDisDown = -1f;
-    private float hitboxDelay = 0f;
-    private float hitboxLinger = 0.2f;
+    private float spawnDisFor = .7f;
+    private float spawnDisDown = -.2f;
+    private float atkCD = 0.5f;
+    private float hitboxDelay = 0f;//for animation purposes later
+    private float hitboxLinger = 0.05f;
+    private bool canAtk = true;
 
     private IEnumerator spawnHitbox()
     {
+        canAtk = false;
         if (sr.flipX == false)
         {
-            spawnDisFor = 5f;
+            Vector3 spawnPos = transform.position + transform.right * spawnDisFor + transform.up * spawnDisDown;
+            GameObject hitbox = Instantiate(atkPrefab, spawnPos, transform.rotation);
+            yield return new WaitForSeconds(hitboxLinger);
+            Destroy(hitbox);
         }
         if (sr.flipX == true)
         {
-            spawnDisFor = -5f;
+            Vector3 spawnPos = transform.position + transform.right * -spawnDisFor + transform.up * spawnDisDown;
+            GameObject hitbox = Instantiate(atkPrefab, spawnPos, transform.rotation);
+            yield return new WaitForSeconds(hitboxLinger);
+            Destroy(hitbox);
         }
-
-        //Vector3 spawnPos = transform.position + transform.forward * spawnDisFor +
-        //transform.up * spawnDisDown;
-        float DisFor = transform.position.x * spawnDisFor;
-        float DisDown = transform.position.y * spawnDisDown;
-        Vector3 spawnPos = new Vector3(DisFor,DisDown, 0f);
-        GameObject hitbox = Instantiate(atkPrefab, spawnPos, transform.rotation);
-        yield return new WaitForSeconds(hitboxLinger);
-        Destroy(hitbox);
+        yield return new WaitForSeconds(atkCD);
+        canAtk = true;
     }
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if (canAtk)
         {
-            StartCoroutine(spawnHitbox());
+            if (context.performed)
+            {
+                StartCoroutine(spawnHitbox());
+            }
         }
     }
 }
