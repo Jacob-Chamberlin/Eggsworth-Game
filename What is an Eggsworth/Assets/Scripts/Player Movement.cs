@@ -9,7 +9,7 @@ public class PlayerMovement :MonoBehaviour
     public float moveSpeed = 10f;
     private bool isMoving;
     //public float moveSpeedCheck;
-    float hMovement;
+    float hMovement; //use -1/1 for L/R movement checks
 
     //sprint
     public bool isSprinting;
@@ -37,9 +37,14 @@ public class PlayerMovement :MonoBehaviour
     private bool isGliding;
 
     //groundcheck
-    
     public Vector2 groundCheckSize = new Vector2(0.5f, 0.5f);
-    private bool onGround;
+    public bool onGround;
+
+    //wall check
+    public Vector2 wallCheckSize = new Vector2(0.5f, 0.5f);
+    public bool touchingWall;
+    private bool touchingR;
+    private bool touchingL;
 
     //gravity
     public float baseGravity = 2f;
@@ -53,8 +58,11 @@ public class PlayerMovement :MonoBehaviour
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheckPos;
+    [SerializeField] private Transform checkWallLeft;
+    [SerializeField] private Transform checkWallRight;
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask wallLayer;
     [SerializeField] private TrailRenderer tr;
 
 
@@ -107,6 +115,7 @@ public class PlayerMovement :MonoBehaviour
         
 
         GroundCheck();
+        WallCheck();
         Gravity();
         //animator.SetFloat("xVelocity", Mathf.Abs(rb.velocity.x));
         //animator.SetFloat("yVelocity", rb.velocity.y);
@@ -128,7 +137,6 @@ public class PlayerMovement :MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         hMovement = context.ReadValue<Vector2>().x;
-
     }
 
     public void Jump(InputAction.CallbackContext context)
@@ -242,6 +250,28 @@ public class PlayerMovement :MonoBehaviour
 
     }
 
+    private void WallCheck()
+    {
+        if(Physics2D.OverlapBox(checkWallLeft.position, wallCheckSize, 0, wallLayer) && hMovement == -1)
+        {
+            touchingWall = true;
+            touchingL = true;
+            //if (hMovement == -1) hMovement = 0;
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+
+        }
+        else if (Physics2D.OverlapBox(checkWallRight.position, wallCheckSize, 0, wallLayer) && hMovement == 1)
+        {
+            touchingWall = true;
+            touchingR = true;
+            //if (hMovement == 1) hMovement = 0;
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+        }
+        else
+        {
+            return;
+        }
+    }
     private void GroundCheck()
     {
         if (Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundLayer))
@@ -277,5 +307,11 @@ public class PlayerMovement :MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(groundCheckPos.position, groundCheckSize);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(checkWallLeft.position, wallCheckSize);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(checkWallRight.position, wallCheckSize);
     }
 }

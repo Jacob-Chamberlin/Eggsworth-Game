@@ -6,18 +6,19 @@ TagManager:
   tags:
   - Hazard
   - PlayerAtk
+  - RespawnPoint
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
+  - Wall
+  - 
+  - 
   - Ground
-  - 
-  - 
-  - 
-  - 
+  - Ceiling
   - 
   - 
   - 

@@ -9,7 +9,7 @@ public class PlayerAttack : MonoBehaviour
 
     private float spawnDisFor = .7f;
     private float spawnDisDown = -.2f;
-    private float atkCD = 0.5f;
+    private float atkCD = 0.3f;
     private float hitboxDelay = 0f;//for animation purposes later
     private float hitboxLinger = 0.05f;
     private bool canAtk = true;
