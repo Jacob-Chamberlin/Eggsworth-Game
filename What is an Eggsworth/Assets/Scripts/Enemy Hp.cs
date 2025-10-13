@@ -6,16 +6,32 @@ public class EnemyHp : MonoBehaviour
     public int hp = 3;
     public bool canTakeDmg = true;
     public float damageCD = 0.2f;
+    public string myTag;
 
     // Update is called once per frame
+    private void Start()
+    {
+        myTag = gameObject.tag;
+    }
+
     void Update()
     {
+        //if (hp <= 0 && myTag == "Boss")
+        {
+
+        }
+
         if (hp <= 0)
         {
             gameObject.SetActive(false);
             Destroy(gameObject);
         }
     }
+    public void setHealth(int health)
+    {
+        hp = health;
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("PlayerAtk"))
