@@ -1,18 +1,20 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BlueBoss : MonoBehaviour
 {
-    public float flightSpd = 2.5f;
+    public float flightSpd = 4.5f;
     public List<Transform> waypoints;
     public float disToWaypoint = 0.1f;
+    public float waitTime = 1.5f;
 
     public bool isAlive = true;
     public bool canMove = true;
 
     private Rigidbody2D rb;
     Transform nextWaypoint;
-    int wayPointNum = 0;
+    int wayPointNum = 7;
     int prevWayPointNum = 99;
 
 
@@ -28,7 +30,7 @@ public class BlueBoss : MonoBehaviour
         {
             if (canMove)
             {
-                Flight();
+                StartCoroutine(Flight());
             }
             else
             {
@@ -37,7 +39,7 @@ public class BlueBoss : MonoBehaviour
         }
     }
 
-    private void Flight()
+    IEnumerator Flight()
     {
         //fly to random waypoint
         Vector2 dirToWaypoint = (nextWaypoint.position - transform.position).normalized;
@@ -48,15 +50,28 @@ public class BlueBoss : MonoBehaviour
 
         if (distance <= disToWaypoint)
         {
-            //random waypoint
+            //find random waypoint
             int randNum = Random.Range(0, waypoints.Count);
+
             if (randNum != prevWayPointNum)
             {
                 prevWayPointNum = wayPointNum;
                 wayPointNum = randNum;
             }
+            //int range = Random.Range(5, -5);
+            //int randNum = Mathf.Clamp(range, 0, waypoints.Count);
 
+            //prevWayPointNum = wayPointNum;
+            //wayPointNum = randNum;
+
+            yield return new WaitForSeconds(waitTime);
             nextWaypoint = waypoints[wayPointNum];
+
         }
+    }
+    IEnumerator delayedFlight()
+    {
+        yield return new WaitForSeconds(waitTime);
+        bool wait = false;
     }
 }
