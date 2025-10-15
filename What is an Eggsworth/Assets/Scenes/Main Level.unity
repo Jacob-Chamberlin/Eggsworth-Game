@@ -2256,8 +2256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb0e285f851be6947b7645d65ef1fb07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  dc: {fileID: 0}
-  BlueBoss: {fileID: 0}
+  state: 0
 --- !u!1001 &339479533
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2496,7 +2495,7 @@ PrefabInstance:
       objectReference: {fileID: 736188537}
     - target: {fileID: 3076584319873903408, guid: 234956f56084b214baf8aba9ee9e507a, type: 3}
       propertyPath: m_VersionIndex
-      value: 25
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 3076584319873903408, guid: 234956f56084b214baf8aba9ee9e507a, type: 3}
       propertyPath: m_MeshFormatVersion
@@ -5728,7 +5727,7 @@ PrefabInstance:
       objectReference: {fileID: 2045936199}
     - target: {fileID: 3076584319873903408, guid: 234956f56084b214baf8aba9ee9e507a, type: 3}
       propertyPath: m_VersionIndex
-      value: 25
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 3076584319873903408, guid: 234956f56084b214baf8aba9ee9e507a, type: 3}
       propertyPath: m_MeshFormatVersion
