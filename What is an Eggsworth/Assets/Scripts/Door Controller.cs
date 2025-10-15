@@ -3,29 +3,34 @@ using UnityEngine;
 public class DoorController : MonoBehaviour
 {
     private bool triggered = false;
-    public bool _inBossRoom;
-
-
     public float shutDis = 1.5f;
+
+
+    public void Awake()
+    {
+
+    }
 
     public void childTriggered()
     {
+        //GameManager gm = Camera.main.GetComponent<GameManager>();
+
+        if (triggered == false)
         {
-            if (triggered == false)
-            {
-                Vector3 currentPos = transform.position;
-                currentPos.y -= shutDis;
-                transform.position = currentPos;
-                Debug.Log("Door moved");
+            Vector3 currentPos = transform.position;
+            currentPos.y -= shutDis;
+            transform.position = currentPos;
+            Debug.Log("Door moved");
 
-                _inBossRoom = true;
-                triggered = true;
-            }
-
+            //gm.inBossRoom();
+            triggered = true;
         }
+
     }
-    public bool inBossRoom()
+    public void bossDefeated()
     {
-        return _inBossRoom;
+        Vector3 currentPos = transform.position;
+        currentPos.y += shutDis;
+        transform.position = currentPos;
     }
 }

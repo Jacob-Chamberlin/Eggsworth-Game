@@ -9,6 +9,7 @@ public class BlueBoss : MonoBehaviour
     public float disToWaypoint = 0.1f;
     public float waitTime = 1.5f;
 
+    public bool _playerIsHere = false;
     public bool isAlive = true;
     public bool canMove = true;
 
@@ -18,25 +19,33 @@ public class BlueBoss : MonoBehaviour
     int prevWayPointNum = 99;
 
 
-    public void Start()
+    public void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         nextWaypoint = waypoints[wayPointNum];
     }
+    public void playerIsHere()
+    {
+        _playerIsHere = true;
+    }
 
     public void FixedUpdate()
     {
-        if (isAlive)
+        if (_playerIsHere)
         {
-            if (canMove)
+            if (isAlive)
             {
-                StartCoroutine(Flight());
-            }
-            else
-            {
-                rb.linearVelocity = Vector3.zero;
+                if (canMove)
+                {
+                    StartCoroutine(Flight());
+                }
+                else
+                {
+                    rb.linearVelocity = Vector3.zero;
+                }
             }
         }
+
     }
 
     IEnumerator Flight()

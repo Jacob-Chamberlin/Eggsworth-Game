@@ -15,7 +15,7 @@ public class TriggerDoor : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             {
-                Debug.Log("child triggered");
+                //Debug.Log("child triggered");
                 dc.childTriggered();
             }
         }
