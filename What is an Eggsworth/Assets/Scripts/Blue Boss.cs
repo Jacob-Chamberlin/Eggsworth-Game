@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BlueBoss : MonoBehaviour
@@ -7,56 +8,73 @@ public class BlueBoss : MonoBehaviour
     public float flightSpd = 4.5f;
     public List<Transform> waypoints;
     public float disToWaypoint = 0.1f;
-    public float waitTime = 1.5f;
+    public const float waitTime = 2f;
 
     public bool _playerIsHere = false;
-    public bool isAlive = true;
-    public bool canMove = true;
+
+    int doNext = 0;
+    int didPrev = 99;
 
     private Rigidbody2D rb;
     Transform nextWaypoint;
     int wayPointNum = 7;
     int prevWayPointNum = 99;
 
+    public enum BossState { Inactive, Flying, Waiting, Decide, Attack1, Attack2 }
+    public BossState currentState;
+
 
     public void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         nextWaypoint = waypoints[wayPointNum];
+        //currentState = BossState.Inactive;
+        currentState = BossState.Flying;
     }
     public void playerIsHere()
     {
-        _playerIsHere = true;
+        currentState = BossState.Flying;
     }
 
     public void FixedUpdate()
     {
-        if (_playerIsHere)
+        switch (currentState)
         {
-            if (isAlive)
-            {
-                if (canMove)
-                {
-                    StartCoroutine(Flight());
-                }
-                else
-                {
-                    rb.linearVelocity = Vector3.zero;
-                }
-            }
+            case BossState.Inactive:
+                break;
+            case BossState.Flying:
+                Flight();
+                break;
+            case BossState.Waiting:
+                Waiting();
+                break;
+            case BossState.Decide:
+                decideNextAction();
+                break;
+            case BossState.Attack1:
+                horizontalSwoop();
+                break;
+            case BossState.Attack2:
+                JonkingIt();
+                break;
+            default: break;
         }
-
+    }
+    public void Waiting()
+    {
+        rb.linearVelocity = Vector3.zero;
+        StartCoroutine(waitTimer(waitTime));
     }
 
-    IEnumerator Flight()
+    public void Flight()
     {
-        //fly to random waypoint
+        //fly to initial waypoint
         Vector2 dirToWaypoint = (nextWaypoint.position - transform.position).normalized;
 
         float distance = Vector2.Distance(nextWaypoint.position, transform.position);
-
         rb.linearVelocity = dirToWaypoint * flightSpd;
 
+        //check if reached waypoint
         if (distance <= disToWaypoint)
         {
             //find random waypoint
@@ -67,20 +85,47 @@ public class BlueBoss : MonoBehaviour
                 prevWayPointNum = wayPointNum;
                 wayPointNum = randNum;
             }
-            //int range = Random.Range(5, -5);
-            //int randNum = Mathf.Clamp(range, 0, waypoints.Count);
-
-            //prevWayPointNum = wayPointNum;
-            //wayPointNum = randNum;
-
-            yield return new WaitForSeconds(waitTime);
             nextWaypoint = waypoints[wayPointNum];
-
+            currentState = BossState.Decide;
         }
     }
-    IEnumerator delayedFlight()
+    public void horizontalSwoop()
     {
-        yield return new WaitForSeconds(waitTime);
-        bool wait = false;
+        Debug.Log("Do the Swoop");
+        currentState = BossState.Waiting;
+    }
+    public void JonkingIt()
+    {
+        Debug.Log("Boutta Jonk it");
+        currentState = BossState.Waiting;
+    }
+    public void decideNextAction()
+    {
+        //makes sure that the next option != prev option
+        do
+        {
+            doNext = Random.Range(0, 3);
+
+        }
+        while (doNext == didPrev);
+        didPrev = doNext;
+
+        switch(doNext)
+        {
+            case 0:
+                currentState = BossState.Waiting; 
+                break;
+            case 1:
+                currentState = BossState.Attack1;
+                break;
+            case 2:
+                currentState = BossState.Attack2;
+                break;
+        }
+    }
+    IEnumerator waitTimer(float time)
+    {
+        yield return new WaitForSeconds(time);
+        currentState = BossState.Flying;
     }
 }
