@@ -10,7 +10,7 @@ public class TriggerDoor : MonoBehaviour
         dc = door.GetComponent<DoorController>();
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
