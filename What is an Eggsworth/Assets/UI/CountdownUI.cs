@@ -30,6 +30,7 @@ public class CountdownUI : MonoBehaviour
             currentTime = 0;
             updateTimer();
             enabled = false;
+            Debug.Log("You Lose");
         }
     }
 

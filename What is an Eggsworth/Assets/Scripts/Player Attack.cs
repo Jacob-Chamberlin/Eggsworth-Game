@@ -7,7 +7,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private GameObject atkPrefab;
 
-    private float spawnDisFor = .7f;
+    private float spawnDisFor = 1.2f;
     private float spawnDisDown = -.2f;
     private float atkCD = 0.3f;
     private float hitboxDelay = 0f;//for animation purposes later

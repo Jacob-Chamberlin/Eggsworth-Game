@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6946873443841942339}
   - component: {fileID: 930722443244895394}
   - component: {fileID: 2654581770234697452}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: testProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,6 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a6c0e0a6dde35b49aae6fb8bb4b88ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::bossProjectile
+  bounces: 2
 --- !u!50 &930722443244895394
 Rigidbody2D:
   serializedVersion: 5
@@ -162,7 +163,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0

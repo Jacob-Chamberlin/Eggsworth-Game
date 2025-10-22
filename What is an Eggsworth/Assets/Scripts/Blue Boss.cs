@@ -41,8 +41,8 @@ public class BlueBoss : MonoBehaviour
 
     //spit attack vars
     public GameObject projectilePrefab;
-    float initialSpd = 5f;
-    float angleOffset = 45f;
+    private float angleOffset = 45f;
+    private float lastAngle = 0f;
 
     //initializers
     private Rigidbody2D rb;
@@ -123,7 +123,6 @@ public class BlueBoss : MonoBehaviour
             currentState = BossState.Decide;
         }
     }
-
     public void prepareSwoop()
     {
         if (choseSide == false)
@@ -200,11 +199,19 @@ public class BlueBoss : MonoBehaviour
     public void JonkingIt()
     {
         Debug.Log("Boutta Jonk it");
-
-
+        createProjectile(new Vector3(0f,0f,15.5f));
+        createProjectile(new Vector3(0f, 0f, 7f));
+        createProjectile(new Vector3(0f, 0f, -7f));
+        createProjectile(new Vector3(0f, 0f, -15.5f));
 
         currentState = BossState.Waiting;
     }
+    public void createProjectile(Vector3 offSetRotation)
+    {
+        var obj = (GameObject)Instantiate(projectilePrefab, transform.position, transform.rotation);
+        obj.transform.Rotate(offSetRotation);
+    }
+
     public void decideNextAction()
     {
         //makes sure that the next option != prev option
@@ -219,13 +226,16 @@ public class BlueBoss : MonoBehaviour
         switch (doNext)
         {
             case 0:
-                currentState = BossState.Waiting;
+                currentState = BossState.Attack2;
                 break;
             case 1:
                 currentState = BossState.SwoopPrepare;
                 break;
             case 2:
                 currentState = BossState.Attack2;
+                break;
+            case 3:
+                currentState = BossState.SwoopPrepare;
                 break;
         }
     }
@@ -248,6 +258,7 @@ public class BlueBoss : MonoBehaviour
             if (other.gameObject.CompareTag("Player"))
             {
                 currentState = BossState.Attack2;
+                Debug.Log("hit player");
             }
             else
             {
@@ -259,6 +270,6 @@ public class BlueBoss : MonoBehaviour
         complete = false;
         choseSide = false;
         currentDelay = 0;
-        currentState = BossState.Flying;
+        //currentState = BossState.Flying;
     }
 }
