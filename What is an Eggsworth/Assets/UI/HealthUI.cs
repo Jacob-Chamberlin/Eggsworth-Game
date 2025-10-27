@@ -1,26 +1,17 @@
-using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class HealthUI : MonoBehaviour
 {
+    private VisualElement[] hearts;
 
-    private Label m_HealthLabel;
-    public PlayerHealth PlayerHealth;
+    [SerializeField] private Sprite emptyHeart_spr;
+    [SerializeField] private Sprite fullHeart_spr;
 
-
-    public void Start()
+    public void Init(int maxHeartCount)
     {
-        var uiDoc = GetComponent<UIDocument>();
-        m_HealthLabel = uiDoc.rootVisualElement.Q<Label>("HealthLabel");
-        PlayerHealth.onHealthChange += HealthChanged;
-
-        HealthChanged();
-
-        //updateTimer();
-    }
-    public void HealthChanged()
-    {
-        m_HealthLabel.text = $"{PlayerHealth.currentHealth}/{PlayerHealth.maxHealth}";
+        VisualElement Container = GetComponent<UIDocument>().rootVisualElement.Q(name: "Container");
     }
 }
