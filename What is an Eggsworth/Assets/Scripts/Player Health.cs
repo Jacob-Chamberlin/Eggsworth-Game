@@ -1,20 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int hp = 5;
+    public int maxHealth = 5;
+    public int currentHealth;
     public bool canTakeDmg = true;
     public float damageCD = 2;
     public string target = "RespawnPoint";
 
+    public Action onHealthChange;
 
+    private void Start()
+    {
+        currentHealth = maxHealth;
+    }
     // Update is called once per frame
     void Update()
     {
         
-        if (hp > 0)
+        if (currentHealth > 0)
         {
 
         }
@@ -33,7 +40,8 @@ public class PlayerHealth : MonoBehaviour
     {
         if (canTakeDmg)
         {
-            hp = hp - amount;
+            currentHealth = currentHealth - amount;
+            onHealthChange?.Invoke();
             canTakeDmg = false;
 
 

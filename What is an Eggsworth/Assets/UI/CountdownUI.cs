@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-using UnityEngine.UIElements; // For UI Toolkit
+using UnityEngine.UIElements;
 
 public class CountdownUI : MonoBehaviour
 {
