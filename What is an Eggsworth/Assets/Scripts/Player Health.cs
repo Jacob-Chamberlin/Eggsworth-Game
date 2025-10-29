@@ -19,7 +19,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         healthUI = GetComponent<HealthUI>();
-        GetComponent<HealthUI>().Init(maxHealth);
+        //GetComponent<HealthUI>().Init(maxHealth);
     }
     public int getMaxHealth()
     {

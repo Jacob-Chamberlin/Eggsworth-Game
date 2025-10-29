@@ -1,0 +1,3 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="BarUI" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/test%20sprites/Temp%20bar.png?fileID=2800000&amp;guid=7302548cd9a650142a6fda94f2d6fdb3&amp;type=3#Temp bar&quot;); background-size: 100px 100px; align-self: flex-end; width: 100px; height: 46px; justify-content: space-between; align-items: flex-end; align-content: flex-end; flex-direction: column-reverse;" />
+</ui:UXML>

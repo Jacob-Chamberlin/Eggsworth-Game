@@ -12,6 +12,7 @@ public class HealthUI : MonoBehaviour
 
     private const string containerName = "Container";
 
+
     public void Init(int maxHealthCount)
     {
         Debug.Log("initalize health");
