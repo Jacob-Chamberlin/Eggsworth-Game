@@ -8,6 +8,7 @@ TagManager:
   - PlayerAtk
   - RespawnPoint
   - Boss
+  - level element
   layers:
   - Default
   - TransparentFX

@@ -1,9 +1,0 @@
-<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="Container" style="flex-grow: 0; width: 265px; flex-direction: row; justify-content: space-between; height: 50px;">
-        <ui:VisualElement name="Heart_1" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/test%20sprites/temp_heart_full.png?fileID=2800000&amp;guid=9eab4437ddbcb0e49aa204a0ef8b0b85&amp;type=3#temp_heart_full&quot;); width: 24px;" />
-        <ui:VisualElement name="Heart_2" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/test%20sprites/temp_heart_full.png?fileID=2800000&amp;guid=9eab4437ddbcb0e49aa204a0ef8b0b85&amp;type=3#temp_heart_full&quot;); width: 24px;" />
-        <ui:VisualElement name="Heart_3" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/test%20sprites/temp_heart_full.png?fileID=2800000&amp;guid=9eab4437ddbcb0e49aa204a0ef8b0b85&amp;type=3#temp_heart_full&quot;); width: 24px;" />
-        <ui:VisualElement name="Heart_4" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/test%20sprites/temp_heart_full.png?fileID=2800000&amp;guid=9eab4437ddbcb0e49aa204a0ef8b0b85&amp;type=3#temp_heart_full&quot;); width: 24px;" />
-        <ui:VisualElement name="Heart_5" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/test%20sprites/temp_heart_full.png?fileID=2800000&amp;guid=9eab4437ddbcb0e49aa204a0ef8b0b85&amp;type=3#temp_heart_full&quot;); width: 24px;" />
-    </ui:VisualElement>
-</ui:UXML>

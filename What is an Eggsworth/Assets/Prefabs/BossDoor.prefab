@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6950851879641467229}
   m_Layer: 0
   m_Name: BossDoor
-  m_TagString: Untagged
+  m_TagString: level element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4b6c8ffd23eb3041aaba6387bcd2432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoorController
+  shutDis: 1.5
 --- !u!1 &6527612888611349351
 GameObject:
   m_ObjectHideFlags: 0

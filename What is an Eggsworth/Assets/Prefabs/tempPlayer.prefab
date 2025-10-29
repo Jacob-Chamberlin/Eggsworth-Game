@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 11390447266645961}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: leftCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7165315666042835978}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: rightCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5969444168204170389}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,15 +102,17 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2120910136635840705}
-  - component: {fileID: 736677792518791953}
   - component: {fileID: 8313721903433804536}
   - component: {fileID: 3229290740740933809}
   - component: {fileID: 5148564422380620716}
+  - component: {fileID: 736677792518791953}
+  - component: {fileID: 3889799463365536682}
+  - component: {fileID: 5443044039090234843}
   - component: {fileID: 8266656380074252555}
   - component: {fileID: 767107454485217721}
   - component: {fileID: 6568233737877046566}
   - component: {fileID: 8890662499154809900}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: tempPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -135,22 +137,6 @@ Transform:
   - {fileID: 7165315666042835978}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &736677792518791953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7524277244228520998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2994188a1344e2c45aef54c7b9903e29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  hp: 5
-  canTakeDmg: 1
-  damageCD: 2
-  target: RespawnPoint
 --- !u!114 &8313721903433804536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,6 +323,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
   sr: {fileID: 6568233737877046566}
   atkPrefab: {fileID: 6284086639618366849, guid: 285dd2568d29044478f33f2e8d89e11c, type: 3}
+--- !u!114 &736677792518791953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7524277244228520998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2994188a1344e2c45aef54c7b9903e29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  maxHealth: 5
+  currentHealth: 0
+  canTakeDmg: 1
+  damageCD: 2
+  target: RespawnPoint
+  healthUI: {fileID: 0}
+--- !u!114 &3889799463365536682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7524277244228520998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1942214480246a448837082af1ced66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthUI
+  health: {fileID: 0}
+  emptyHeart_spr: {fileID: 21300000, guid: a53f70ae78acea148852c8e477042a6a, type: 3}
+  fullHeart_spr: {fileID: 21300000, guid: 9eab4437ddbcb0e49aa204a0ef8b0b85, type: 3}
+--- !u!114 &5443044039090234843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7524277244228520998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: 1e7dda4055588af438be5c94b00b74e4, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 40a26a771b025e040972f46de06881a5, type: 3}
+  m_SortingOrder: 0
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
 --- !u!61 &8266656380074252555
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -13,18 +13,17 @@ public class PlayerHealth : MonoBehaviour
 
     public Action onHealthChange;
 
-    private void Start()
+    public HealthUI healthUI;
+
+    public void Awake()
     {
         currentHealth = maxHealth;
+        healthUI = GetComponent<HealthUI>();
+        GetComponent<HealthUI>().Init(maxHealth);
     }
-    // Update is called once per frame
-    void Update()
+    public int getMaxHealth()
     {
-        
-        if (currentHealth > 0)
-        {
-
-        }
+        return maxHealth;
     }
     void OnCollisionEnter2D(Collision2D other)
     {
@@ -33,6 +32,9 @@ public class PlayerHealth : MonoBehaviour
             Debug.Log("collided with hazard");
             GameObject closestTarget = FindClosestObjectWithTag(target);
             transform.position = closestTarget.transform.position;
+        }
+        if (!other.gameObject.CompareTag("level element"))
+        {
             StartCoroutine(TakeDamage(1));
         }
     }
@@ -40,10 +42,10 @@ public class PlayerHealth : MonoBehaviour
     {
         if (canTakeDmg)
         {
+            //healthUI.updateHealth(maxHealth, currentHealth);
             currentHealth = currentHealth - amount;
             onHealthChange?.Invoke();
             canTakeDmg = false;
-
 
             yield return new WaitForSeconds(damageCD);
             canTakeDmg = true;

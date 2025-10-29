@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class CountdownUI : MonoBehaviour
+public class TimerUI : MonoBehaviour
 {
     [SerializeField] private float initialTime = 60f; //seconds
     private float currentTime;

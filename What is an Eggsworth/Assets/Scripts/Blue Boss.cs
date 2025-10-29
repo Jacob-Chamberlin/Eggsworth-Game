@@ -257,7 +257,8 @@ public class BlueBoss : MonoBehaviour
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                currentState = BossState.Attack2;
+                //change later potentially
+                currentState = BossState.Flying;
                 Debug.Log("hit player");
             }
             else
