@@ -1,76 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class HealthUI : MonoBehaviour
 {
-    private VisualElement[] hearts;
+    public int currHealth;
+    public int maxHealth;
 
-    [SerializeField] private Sprite emptyHeart_spr;
-    [SerializeField] private Sprite fullHeart_spr;
+    public Sprite fullHeart;
+    public Sprite emptyHeart;
+    public Image[] hearts;
 
-    private const string containerName = "Container";
-
-
-    public void Init(int maxHealthCount)
+    public PlayerHealth PlayerHealth;
+    private void Update()
     {
-        Debug.Log("initalize health");
-        VisualElement Container = GetComponent<UIDocument>().rootVisualElement.Q(containerName);
+        currHealth = PlayerHealth.currentHealth;
+        maxHealth = PlayerHealth.maxHealth;
 
-        for (int i = 0; 1 < maxHealthCount; i++)
+        for (int i = 0; i < hearts.Length; i++)
         {
-            Container.Add(child: fullHeartElement(maxHealthCount));
-        }
-
-    }
-    public void updateHealth(int maxHealth, int currentHealth)
-    {
-        int lossHealth = maxHealth - currentHealth;
-        VisualElement Container = GetComponent<UIDocument>().rootVisualElement.Q(containerName);
-
-        for (int i = 0; 1 < currentHealth; i++)
-        {
-            Container.Add(child: fullHeartElement(maxHealth));
-        }
-        for (int i = 0; 1 < lossHealth; i++)
-        {
-            Container.Add(child: emptyHeartElement(maxHealth));
-        }
-    }
-
-    private VisualElement emptyHeartElement(int maxHealth)
-    {
-        VisualElement heart = new VisualElement
-        {
-            style =
+            if (i < currHealth)
             {
-                width = Length.Percent(100/maxHealth),
-                marginBottom = 1,
-                marginLeft = 1,
-                marginTop = 1,
-                marginRight = 1,
-                backgroundImage = new StyleBackground(emptyHeart_spr)
+                hearts[i].sprite = fullHeart;
             }
-
-        };
-        return heart;
-    }
-    private VisualElement fullHeartElement(int maxHealth)
-    {
-        VisualElement heart = new VisualElement
-        {
-            style =
+            else
             {
-                width = Length.Percent(100/maxHealth),
-                marginBottom = 1,
-                marginLeft = 1,
-                marginTop = 1,
-                marginRight = 1,
-                backgroundImage = new StyleBackground(fullHeart_spr)
+                hearts[i].sprite = emptyHeart;
             }
-
-        };
-        return heart;
+            if (i< maxHealth)
+            {
+                hearts[i].enabled = true;
+            }
+            else
+            {
+                hearts[i].enabled = false;
+            }
+        }
     }
 }

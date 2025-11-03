@@ -13,13 +13,9 @@ public class PlayerHealth : MonoBehaviour
 
     public Action onHealthChange;
 
-    public HealthUI healthUI;
-
     public void Awake()
     {
         currentHealth = maxHealth;
-        healthUI = GetComponent<HealthUI>();
-        //GetComponent<HealthUI>().Init(maxHealth);
     }
     public int getMaxHealth()
     {
@@ -42,7 +38,6 @@ public class PlayerHealth : MonoBehaviour
     {
         if (canTakeDmg)
         {
-            //healthUI.updateHealth(maxHealth, currentHealth);
             currentHealth = currentHealth - amount;
             onHealthChange?.Invoke();
             canTakeDmg = false;
