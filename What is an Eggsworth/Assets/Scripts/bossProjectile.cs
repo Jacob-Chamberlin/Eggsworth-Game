@@ -5,6 +5,7 @@ public class bossProjectile : MonoBehaviour
     private Rigidbody2D rb;
     float spd = 9f;
     public int bounces = 10;
+    public bool canDmgPlayer = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,11 +25,7 @@ public class bossProjectile : MonoBehaviour
         {
             bounces--;
         }
-        if (LayerMask.LayerToName(collidedLayer) == "Player")
-        {
-            Destroy(gameObject);
-        }
-        if(collision.gameObject.CompareTag("PlayerAtk"))
+        if (LayerMask.LayerToName(collidedLayer) == "Player" && canDmgPlayer)
         {
             Destroy(gameObject);
         }
@@ -36,6 +33,13 @@ public class bossProjectile : MonoBehaviour
         if (bounces <= 0)
         {
             Destroy(gameObject);
+        }
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("PlayerAtk"))
+        {
+            
         }
     }
 }

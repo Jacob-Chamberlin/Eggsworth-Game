@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class EnemyHp : MonoBehaviour
 {
+    [SerializeField] private DoorController dc;
+    [SerializeField] private TimerUI TimerUI;
+
     public int hp = 3;
     public bool canTakeDmg = true;
     public float damageCD = 0.2f;
@@ -16,9 +19,13 @@ public class EnemyHp : MonoBehaviour
 
     void Update()
     {
-        //if (hp <= 0 && myTag == "Boss")
+        if (hp <= 0 && myTag == "Boss")
         {
+            dc.bossDefeated();
+            TimerUI.stopTimer();
 
+            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
 
         if (hp <= 0)
@@ -36,7 +43,7 @@ public class EnemyHp : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PlayerAtk"))
         {
-            Debug.Log("collided player attack");
+            //Debug.Log("collided player attack");
             StartCoroutine(TakeDamage(1));
         }
     }

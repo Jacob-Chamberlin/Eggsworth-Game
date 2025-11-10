@@ -7,6 +7,7 @@ public class TimerUI : MonoBehaviour
     [SerializeField] private float initialTime = 60f; //seconds
     private float currentTime;
     private Label m_TimerLabel;
+    bool m_Running = true;
 
     public void OnEnable()
     {
@@ -20,12 +21,12 @@ public class TimerUI : MonoBehaviour
 
     private void Update()
     {
-        if(currentTime > 0)
+        if(currentTime > 0 && m_Running)
         {
             currentTime -= Time.deltaTime;
             updateTimer();
         }
-        else
+        else if (currentTime < 0 && m_Running)
         {
             currentTime = 0;
             updateTimer();
@@ -38,5 +39,9 @@ public class TimerUI : MonoBehaviour
     {
         TimeSpan timeSpan = TimeSpan.FromSeconds(currentTime);
         m_TimerLabel.text = string.Format("{0:00}:{1:00}", timeSpan.Minutes, timeSpan.Seconds);
+    }
+    public void stopTimer()
+    {
+        m_Running = false;
     }
 }

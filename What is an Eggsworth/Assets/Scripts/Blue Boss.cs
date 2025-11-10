@@ -56,12 +56,13 @@ public class BlueBoss : MonoBehaviour
     public void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        nextWaypoint = waypoints[wayPointNum];
         currentState = BossState.Inactive;
+
         //currentState = BossState.Flying;
     }
     public void playerIsHere()
     {
-        nextWaypoint = waypoints[wayPointNum];
         currentState = BossState.Flying;
     }
 
@@ -71,7 +72,6 @@ public class BlueBoss : MonoBehaviour
         switch (currentState)
         {
             case BossState.Inactive:
-                playerIsHere();
                 break;
             case BossState.Flying:
                 Flight();
@@ -127,7 +127,7 @@ public class BlueBoss : MonoBehaviour
     {
         if (choseSide == false)
         {
-            Debug.Log("Prepare the Swoop");
+            //Debug.Log("Prepare the Swoop");
 
             if (pSide.x < 0)
             {
@@ -198,7 +198,7 @@ public class BlueBoss : MonoBehaviour
     }
     public void JonkingIt()
     {
-        Debug.Log("Boutta Jonk it");
+        //Debug.Log("Boutta Jonk it");
         createProjectile(new Vector3(0f,0f,15.5f));
         createProjectile(new Vector3(0f, 0f, 7f));
         createProjectile(new Vector3(0f, 0f, -7f));
@@ -217,7 +217,8 @@ public class BlueBoss : MonoBehaviour
         //makes sure that the next option != prev option
         do
         {
-            doNext = Random.Range(0, 3);
+            doNext = Random.Range(0, 4);
+            //Debug.Log(doNext);
 
         }
         while (doNext == didPrev);
@@ -259,7 +260,7 @@ public class BlueBoss : MonoBehaviour
             {
                 //change later potentially
                 currentState = BossState.Flying;
-                Debug.Log("hit player");
+                //Debug.Log("hit player");
             }
             else
             {
