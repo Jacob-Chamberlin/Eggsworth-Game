@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class TimerUI : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class TimerUI : MonoBehaviour
             currentTime = 0;
             updateTimer();
             enabled = false;
-            Debug.Log("You Lose");
+            SceneManager.LoadScene(5);
         }
     }
 
