@@ -17,14 +17,14 @@ public class PlayerAttack : MonoBehaviour
     private IEnumerator spawnHitbox()
     {
         canAtk = false;
-        if (sr.flipX == false)
+        if (sr.flipX == true)
         {
             Vector3 spawnPos = transform.position + transform.right * spawnDisFor + transform.up * spawnDisDown;
             GameObject hitbox = Instantiate(atkPrefab, spawnPos, transform.rotation);
             yield return new WaitForSeconds(hitboxLinger);
             Destroy(hitbox);
         }
-        if (sr.flipX == true)
+        if (sr.flipX == false)
         {
             Vector3 spawnPos = transform.position + transform.right * -spawnDisFor + transform.up * spawnDisDown;
             GameObject hitbox = Instantiate(atkPrefab, spawnPos, transform.rotation);

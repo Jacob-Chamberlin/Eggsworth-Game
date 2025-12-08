@@ -92,13 +92,13 @@ public class PlayerMovement :MonoBehaviour
 
         if (hMovement == 1)
         {
-            sr.flipX = false;
+            sr.flipX = true;
             isMoving = true;
             //animator.SetBool("isMoving", isMoving);
         }
         if (hMovement == -1)
         {
-            sr.flipX = true;
+            sr.flipX = false;
             isMoving = true;
             //animator.SetBool("isMoving", isMoving);
         }
@@ -220,11 +220,11 @@ public class PlayerMovement :MonoBehaviour
         rb.gravityScale = 0f;
 
         //check which way to dash
-        if (sr.flipX == false)
+        if (sr.flipX == true)
         {
             rb.linearVelocity = new Vector2(transform.localScale.x * dashPower, 0f);
         }
-        if (sr.flipX == true)
+        if (sr.flipX == false)
         {
             rb.linearVelocity = new Vector2(transform.localScale.x * -dashPower, 0f);
         }
