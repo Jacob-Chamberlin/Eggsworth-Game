@@ -2,13 +2,17 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using System;
+using Cinemachine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public GameState state;
-    public Camera mainCam;
-    public Camera bossCam;
+
+    public CinemachineVirtualCamera[] cameras;
+    public CinemachineVirtualCamera playerCam;
+    public CinemachineVirtualCamera bossCam;
+    private CinemachineVirtualCamera currentCam;
 
     [SerializeField] private BlueBoss bb;
 
@@ -16,26 +20,49 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
     }
-    private void Start ()
+    private void Start()
     {
-        mainCam.gameObject.SetActive(true);
-        bossCam.gameObject.SetActive(false);
+
+        currentCam = playerCam;
+
+        for (int i = 0; i < cameras.Length; i++)
+        {
+            if (cameras[i] == currentCam)
+            {
+                cameras[i].Priority = 20;
+            }
+            else
+            {
+                cameras[i].Priority = 10;
+            }
+        }
+    }
+    public void SwitchCam(CinemachineVirtualCamera Newcam)
+    {
+        currentCam = Newcam;
+        currentCam.Priority = 20;
+
+        for (int i = 0; i < cameras.Length; i++)
+        {
+            if (cameras[i] != currentCam)
+            {
+                cameras[i].Priority = 10;
+            }
+        }
     }
 
     public void inBossRoom()
     {
-        mainCam.gameObject.SetActive(false);
-        bossCam.gameObject.SetActive(true);
         state = GameState.inBossFight;
         bb.playerIsHere();
+        SwitchCam(bossCam);
     }
 
     public void bossDefeated()
     {
         Debug.Log("ahhhh");
         state = GameState.endBossFight;
-        mainCam.gameObject.SetActive(true);
-        bossCam.gameObject.SetActive(false);
+        SwitchCam(playerCam);
     }
 
     public void UpdateGameState(GameState newState)
