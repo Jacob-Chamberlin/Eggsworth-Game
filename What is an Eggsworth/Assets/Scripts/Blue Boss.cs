@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class BlueBoss : MonoBehaviour
 {
+    Animator animator;
+    [SerializeField] private SpriteRenderer sr;
 
     public List<Transform> waypoints;
     public List<Transform> swoopPoints;
@@ -14,7 +16,7 @@ public class BlueBoss : MonoBehaviour
 
     //move speed values
     public const float flightSpd = 7f;
-    public const float swoopSpd = 12.5f;
+    public const float swoopSpd = 14.5f;
 
     //check if should become active
     public bool _playerIsHere = false;
@@ -56,6 +58,8 @@ public class BlueBoss : MonoBehaviour
     public void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
         nextWaypoint = waypoints[wayPointNum];
         currentState = BossState.Inactive;
 
@@ -74,6 +78,8 @@ public class BlueBoss : MonoBehaviour
             case BossState.Inactive:
                 break;
             case BossState.Flying:
+                animator.SetBool("swooping", false);
+                animator.SetBool("isFlying", true);
                 Flight();
                 break;
             case BossState.Waiting:
@@ -83,6 +89,8 @@ public class BlueBoss : MonoBehaviour
                 decideNextAction();
                 break;
             case BossState.SwoopPrepare:
+                animator.SetBool("swooping", true);
+                animator.SetBool("isFlying", false);
                 prepareSwoop();
                 break;
             case BossState.Swoop:
@@ -102,6 +110,14 @@ public class BlueBoss : MonoBehaviour
 
     public void Flight()
     {
+        if (pSide.x < 0)
+        {
+            sr.flipX = true;
+        }
+        if (pSide.x > 0)
+        {
+            sr.flipX = false;
+        }
         //fly to initial waypoint
         Vector2 dirToWaypoint = (nextWaypoint.position - transform.position).normalized;
 
@@ -132,10 +148,12 @@ public class BlueBoss : MonoBehaviour
             if (pSide.x < 0)
             {
                 nextSwoop = swoopPoints[1];
+                sr.flipX = false;
             }
             if (pSide.x > 0)
             {
                 nextSwoop = swoopPoints[0];
+                sr.flipX=true;
             }
             choseSide = true;
         }
@@ -151,6 +169,18 @@ public class BlueBoss : MonoBehaviour
 
         if (distance <= disToSwoopPos)
         {
+            animator.SetBool("swooping", false);
+            animator.SetBool("atPoint", true);
+            animator.SetBool("showTell", true);
+            if (pSide.x < 0)
+            {
+                sr.flipX = true;
+            }
+            if (pSide.x > 0)
+            {
+                sr.flipX = false;
+            }
+
             currentDelay += Time.deltaTime;
             if (currentDelay >= atkDelay)
             {
@@ -162,6 +192,8 @@ public class BlueBoss : MonoBehaviour
         }
         if (complete)
         {
+            animator.SetBool("atPoint", false);
+            animator.SetBool("showTell", false);
             choseSide = false;
             currentDelay = 0;
         }
@@ -169,9 +201,9 @@ public class BlueBoss : MonoBehaviour
     }
     public void Swoop()
     {
+        animator.SetBool("swooping", true);
         if (!choseSide)
         {
-            //Debug.Log("Prepare the Swoop");
             if (pSide.x < 0)
             {
                 LR = true;
@@ -259,6 +291,9 @@ public class BlueBoss : MonoBehaviour
             if (other.gameObject.CompareTag("Player"))
             {
                 //change later potentially
+                animator.SetBool("swooping", false);
+                animator.SetBool("atPoint", false);
+                animator.SetBool("showTell", false);
                 currentState = BossState.Flying;
                 //Debug.Log("hit player");
             }

@@ -4,6 +4,7 @@ using UnityEngine;
 public class EnemyHp : MonoBehaviour
 {
     [SerializeField] private DoorController dc;
+    [SerializeField] private GameManager gm;
     [SerializeField] private TimerUI TimerUI;
 
     public int hp = 3;
@@ -22,6 +23,7 @@ public class EnemyHp : MonoBehaviour
         if (hp <= 0 && myTag == "Boss")
         {
             dc.bossDefeated();
+            gm.bossDefeated();
             TimerUI.stopTimer();
 
             gameObject.SetActive(false);

@@ -29,7 +29,7 @@ public class PlayerMovement :MonoBehaviour
     int jumpsRemaining;
     private bool canDJump;
     private bool isDJumping;
-    private bool isJumping;
+    public bool isJumping;
 
     //glide
     private bool canGlide = false;
@@ -71,7 +71,7 @@ public class PlayerMovement :MonoBehaviour
     {
         //checks 
         maxFallSpeedCheck = maxFallSpeed;
-        //animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
     }
     private void Update()
@@ -81,36 +81,32 @@ public class PlayerMovement :MonoBehaviour
             return;
         }
 
-        if (isSprinting == false)
-        {
-            rb.linearVelocity = new Vector2(hMovement * moveSpeed, rb.linearVelocity.y);
-        }
-        else
-        {
-            rb.linearVelocity = new Vector2(hMovement * sprintSpeed, rb.linearVelocity.y);
-        }
+        rb.linearVelocity = new Vector2(hMovement * sprintSpeed, rb.linearVelocity.y);
 
         if (hMovement == 1)
         {
             sr.flipX = true;
             isMoving = true;
-            //animator.SetBool("isMoving", isMoving);
+            animator.SetBool("isRunning", true);
+            
         }
         if (hMovement == -1)
         {
             sr.flipX = false;
             isMoving = true;
-            //animator.SetBool("isMoving", isMoving);
+            animator.SetBool("isRunning", true);
+            
         }
         if (hMovement == 0)
         {
             isMoving = false;
-            //animator.SetBool("isMoving", isMoving);
+            animator.SetBool("isRunning", false);
+
         }
         if (rb.linearVelocity.y <= 0)
         {
             isDJumping = false;
-            //animator.SetBool("isDJumping", isDJumping);
+            animator.SetBool("isDJumping", false);
         }
         
 
@@ -144,12 +140,13 @@ public class PlayerMovement :MonoBehaviour
         if (jumpsRemaining > 0)
         {
             isJumping = true;
-            //animator.SetBool("isJumping", isJumping);
+
+            animator.SetBool("isJumping", true);
+            StartCoroutine(JumpTimer());
             if (context.performed && onGround == true)
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
                 jumpsRemaining--;
-
             }
             if (context.canceled && rb.linearVelocity.y > 0 && canDJump == false)
             {
@@ -158,7 +155,7 @@ public class PlayerMovement :MonoBehaviour
             if (context.performed && canDJump == true)
             {
                 isDJumping = true;
-                //animator.SetBool("isDJumping", isDJumping);
+                animator.SetBool("isDJumping", true);
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, airJumpPower);
                 jumpsRemaining--;
             }
@@ -167,6 +164,13 @@ public class PlayerMovement :MonoBehaviour
 
             }
         }
+    }
+    private IEnumerator JumpTimer()
+    {
+        yield return new WaitForSeconds(0.35f);
+        isJumping = false;
+        animator.SetBool("isJumping", false);
+
     }
 
     public void Glide(InputAction.CallbackContext context)
@@ -188,21 +192,6 @@ public class PlayerMovement :MonoBehaviour
             }
         }
     }
-
-    /*public void Sprint(InputAction.CallbackContext context)
-    {
-        if (context.performed && hMovement != 0)
-        {
-            isSprinting = true;
-            animator.SetBool("isSprinting", isSprinting);
-        }
-        if (context.canceled)
-        {
-            isSprinting = false;
-            animator.SetBool("isSprinting", isSprinting);
-        }
-    }
-    */
     public void OnDash(InputAction.CallbackContext context)
     {
         if (context.performed && canDash == true)
@@ -216,6 +205,7 @@ public class PlayerMovement :MonoBehaviour
         //set up vars so other code can stfu
         canDash = false;
         isDashing = true;
+        animator.SetBool("isDashing", true);
         float normGravity = rb.gravityScale;
         rb.gravityScale = 0f;
 
@@ -237,6 +227,7 @@ public class PlayerMovement :MonoBehaviour
         tr.emitting = false;
         rb.gravityScale = normGravity;
         isDashing = false;
+        animator.SetBool("isDashing", false);
 
         //if (onGround)
         {
@@ -283,6 +274,7 @@ public class PlayerMovement :MonoBehaviour
                 maxFallSpeed = maxFallSpeedCheck;
             }
             onGround = true;
+            animator.SetBool("Grounded", true);
             canDJump = false;
 
         }
@@ -291,14 +283,13 @@ public class PlayerMovement :MonoBehaviour
             if (jumpsRemaining == maxJumps)
             {
                 jumpsRemaining--;
-                //animator.SetBool("isJumping", isJumping);
+                //animator.SetBool("isJumping", true);
             }
             onGround = false;
+            animator.SetBool("Grounded", false);
             canGlide = true;
             canDJump = true;
-            isJumping = false;
-            //animator.SetBool("isJumping", isJumping);
-            //animator.SetBool("isGrounded", onGround);
+            
         }
     }
 

@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public GameState state;
+    public Camera mainCam;
+    public Camera bossCam;
 
     [SerializeField] private BlueBoss bb;
 
@@ -14,16 +16,26 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
     }
+    private void Start ()
+    {
+        mainCam.gameObject.SetActive(true);
+        bossCam.gameObject.SetActive(false);
+    }
 
     public void inBossRoom()
     {
+        mainCam.gameObject.SetActive(false);
+        bossCam.gameObject.SetActive(true);
         state = GameState.inBossFight;
         bb.playerIsHere();
     }
 
     public void bossDefeated()
     {
+        Debug.Log("ahhhh");
         state = GameState.endBossFight;
+        mainCam.gameObject.SetActive(true);
+        bossCam.gameObject.SetActive(false);
     }
 
     public void UpdateGameState(GameState newState)
