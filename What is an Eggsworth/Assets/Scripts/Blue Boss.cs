@@ -54,12 +54,14 @@ public class BlueBoss : MonoBehaviour
     public enum BossState { Inactive, Flying, Waiting, Decide, SwoopPrepare, Swoop, Attack2 }
     public BossState currentState;
 
+    private BlueAttackFlash flash;
 
     public void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+        flash = GetComponent<BlueAttackFlash>();
         nextWaypoint = waypoints[wayPointNum];
         currentState = BossState.Inactive;
 
@@ -172,6 +174,7 @@ public class BlueBoss : MonoBehaviour
             animator.SetBool("swooping", false);
             animator.SetBool("atPoint", true);
             animator.SetBool("showTell", true);
+            flash.CallFlasher();
             if (pSide.x < 0)
             {
                 sr.flipX = true;

@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TellFlashMat
-  m_Shader: {fileID: -6465566751694194690, guid: e300cf50a0f170b45b3d36d959c9ef3a, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 87e8497789ceea54fbc2b9c5f63bf864, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -24,15 +24,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainText:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 0411c7b530e2a574eb565065c35cfd7b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D:
-        m_Texture: {fileID: 2800000, guid: be7dc9540095d48429dd26ca4f72273a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0411c7b530e2a574eb565065c35cfd7b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -49,12 +45,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _FlashAmount: 1
+    - _FlashAmount: 0
     m_Colors:
-    - _TellColor: {r: 6.8528295, g: 0, b: 0, a: 1}
+    - _TellColor: {r: 2.490566, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &158837398298226370
+--- !u!114 &1198750353987049038
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
