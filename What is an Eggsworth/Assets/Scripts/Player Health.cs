@@ -26,7 +26,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if(currentHealth <= 0)
         {
-            SceneManager.LoadScene(5);
+            SceneManager.LoadScene(4);
         }
     }
     void OnCollisionEnter2D(Collision2D other)

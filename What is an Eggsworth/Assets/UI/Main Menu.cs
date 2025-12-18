@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
 {
     public void OnPlayButton()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
     public void OnQuitButton()
     {
@@ -16,10 +16,10 @@ public class MainMenu : MonoBehaviour
     }
     public void MainMenuButton()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(0);
     }
     public void OnInstructions()
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(1);
     }
 }

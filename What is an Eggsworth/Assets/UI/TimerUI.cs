@@ -45,4 +45,8 @@ public class TimerUI : MonoBehaviour
     {
         m_Running = false;
     }
+    public float getRemainingTime()
+    {
+        return currentTime;
+    }
 }

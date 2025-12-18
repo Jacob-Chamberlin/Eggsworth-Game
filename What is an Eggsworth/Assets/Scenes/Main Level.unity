@@ -2090,7 +2090,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: -0.007808356, y: -0.0122873355, z: 0.00009204555, w: -0.999894}
-  m_LocalPosition: {x: -3.3574276, y: 11.663799, z: -10.47213}
+  m_LocalPosition: {x: -3.2574277, y: 11.663799, z: -10.47213}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5026,7 +5026,7 @@ Transform:
   m_GameObject: {fileID: 775972569}
   serializedVersion: 2
   m_LocalRotation: {x: -0.007808356, y: -0.0122873355, z: 0.00009204555, w: -0.999894}
-  m_LocalPosition: {x: -238.48001, y: -1.4499998, z: 12.08}
+  m_LocalPosition: {x: -238.38, y: -1.4499998, z: 12.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11513,6 +11513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3d1fd5956ca3b440b342940f7c95f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Wincondition
+  timer: {fileID: 1790746804}
 --- !u!1 &1867407032
 GameObject:
   m_ObjectHideFlags: 0
@@ -12438,7 +12439,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 736677792518791953, guid: 1857b8ed4923a6142bd2f5806b25eb90, type: 3}
       propertyPath: damageCD
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1333513809606816025, guid: 1857b8ed4923a6142bd2f5806b25eb90, type: 3}
       propertyPath: m_Layer
@@ -12458,7 +12459,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2120910136635840705, guid: 1857b8ed4923a6142bd2f5806b25eb90, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.1
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 2120910136635840705, guid: 1857b8ed4923a6142bd2f5806b25eb90, type: 3}
       propertyPath: m_LocalPosition.y
